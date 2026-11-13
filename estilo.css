@@ -1,0 +1,171 @@
+/* ===== Colores (modo claro) ===== */
+:root {
+  --fondo-1: #fdf0ec;                    /* color inicial del degradado de fondo */
+  --fondo-2: #f6dfe3;                    /* color final del degradado de fondo */
+  --papel: #fffdfa;                      /* color de la hoja */
+  --texto: #4a3a3a;                      /* color del texto */
+  --suave: #9a7b7b;                      /* textos secundarios */
+  --acento: #b5465a;                     /* color de títulos y vínculos */
+  --resalte: rgba(181, 70, 90, 0.14);    /* color del "resaltador" de los vínculos */
+  --linea: #efe2d6;                      /* bordes finos */
+}
+
+/* ===== Colores (modo oscuro, si el celular lo usa) ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo-1: #1d1517;
+    --fondo-2: #2a1b20;
+    --papel: #2a2124;
+    --texto: #f1e6e2;
+    --suave: #b99a9a;
+    --acento: #e58a9b;
+    --resalte: rgba(229, 138, 155, 0.18);
+    --linea: #3d3033;
+  }
+}
+
+/* ===== Fondo y tipo de letra general ===== */
+body {
+  margin: 0;                                                        /* quita márgenes del navegador */
+  min-height: 100vh;                                                /* el fondo cubre toda la pantalla */
+  background: linear-gradient(160deg, var(--fondo-1), var(--fondo-2)) fixed; /* degradado que no se mueve al hacer scroll */
+  color: var(--texto);                                              /* color del texto */
+  font-family: "Cormorant Garamond", Georgia, serif;                /* letra elegante (si falla, usa Georgia) */
+  font-size: 1.25rem;                                               /* tamaño base, esta fuente es pequeña */
+  line-height: 1.75;                                                /* espacio entre renglones */
+  display: flex;                                                    /* permite centrar la hoja */
+  justify-content: center;                                          /* centra horizontalmente */
+  overflow-x: hidden;                                               /* evita scroll lateral por los corazones */
+}
+
+/* ===== La hoja de la carta ===== */
+main {
+  position: relative;                    /* necesario para ponerla encima de los corazones */
+  z-index: 1;                            /* la hoja queda por delante de los corazones */
+  width: 100%;                           /* usa todo el ancho disponible... */
+  max-width: 580px;                      /* ...hasta un máximo de 580px */
+  margin: 36px 16px;                     /* separación con los bordes */
+  padding: 44px 32px 36px;               /* espacio interior de la hoja */
+  background: var(--papel);              /* color de la hoja */
+  border: 1px solid var(--linea);        /* borde fino */
+  border-radius: 14px;                   /* esquinas redondeadas */
+  box-shadow: 0 12px 40px rgba(120, 50, 70, 0.12); /* sombra suave rosada */
+  align-self: flex-start;                /* la hoja queda arriba, no estirada */
+}
+
+/* Corazón pequeño que adorna la parte superior de la hoja */
+main::before {
+  content: "♡";                          /* el símbolo */
+  position: absolute;                    /* se posiciona respecto a la hoja */
+  top: 10px;                             /* separación desde arriba */
+  left: 50%;                             /* centrado horizontal... */
+  transform: translateX(-50%);           /* ...ajustando su propio ancho */
+  color: var(--acento);                  /* color de acento */
+  font-size: 1.3rem;                     /* tamaño */
+  opacity: 0.7;                          /* un poco transparente */
+}
+
+/* ===== Títulos ===== */
+h1 {
+  font-family: "Dancing Script", cursive; /* letra manuscrita */
+  font-weight: 600;                       /* grosor */
+  font-size: 2.6rem;                      /* tamaño grande */
+  color: var(--acento);                   /* color de acento */
+  text-align: center;                     /* centrado */
+  margin: 6px 0 26px;                     /* espacios arriba y abajo */
+  line-height: 1.2;                       /* altura de línea más ajustada */
+}
+
+/* ===== Párrafos ===== */
+p {
+  margin: 0 0 20px;                       /* espacio debajo de cada párrafo */
+}
+
+/* ===== Aparición suave de cada elemento, uno tras otro ===== */
+main > * {
+  opacity: 0;                             /* empiezan invisibles */
+  animation: aparecer 0.9s ease forwards; /* se muestran con animación y se quedan visibles */
+}
+main > :nth-child(1) { animation-delay: 0.1s; } /* cada hijo entra un poco después */
+main > :nth-child(2) { animation-delay: 0.6s; }
+main > :nth-child(3) { animation-delay: 1.1s; }
+main > :nth-child(4) { animation-delay: 1.6s; }
+main > :nth-child(5) { animation-delay: 2.1s; }
+main > :nth-child(6) { animation-delay: 2.6s; }
+main > :nth-child(7) { animation-delay: 3.1s; }
+
+@keyframes aparecer {                     /* define la animación de entrada */
+  from { opacity: 0; transform: translateY(10px); } /* parte invisible y más abajo */
+  to   { opacity: 1; transform: none; }             /* termina visible y en su sitio */
+}
+
+/* ===== Vínculos con efecto resaltador ===== */
+a {
+  color: var(--acento);                   /* color de acento */
+  text-decoration: none;                  /* quita el subrayado normal */
+  border-bottom: 1px dashed var(--acento);/* subrayado punteado propio */
+  background: linear-gradient(var(--resalte), var(--resalte)) no-repeat 0 100% / 100% 35%; /* franja de resaltador abajo */
+  transition: background-size 0.3s ease;  /* animación suave al pasar el dedo */
+  padding: 0 2px;                         /* pequeño aire a los lados */
+}
+a:hover {
+  background-size: 100% 100%;             /* el resaltador cubre toda la palabra */
+}
+
+/* ===== Botón "Volver a la carta" ===== */
+.volver {
+  display: inline-block;                  /* permite darle forma de botón */
+  margin-top: 10px;                       /* separación con el texto */
+  padding: 8px 18px;                      /* espacio interno */
+  border: 1px solid var(--acento);        /* borde de acento */
+  border-radius: 999px;                   /* forma de píldora */
+  background: none;                       /* sin resaltador */
+  font-size: 1rem;                        /* un poco más pequeño */
+  transition: background 0.3s, color 0.3s;/* animación suave al pasar el dedo */
+}
+.volver:hover {
+  background: var(--acento);              /* se rellena de color */
+  color: var(--papel);                    /* el texto cambia al color de la hoja */
+}
+
+/* ===== Firma ===== */
+.firma {
+  font-family: "Dancing Script", cursive; /* letra manuscrita */
+  font-size: 1.7rem;                      /* tamaño */
+  color: var(--acento);                   /* color de acento */
+  text-align: right;                      /* alineada a la derecha */
+  margin-top: 28px;                       /* separación con el texto */
+}
+
+/* ===== Pista inferior ===== */
+.pista {
+  font-size: 0.95rem;                     /* letra pequeña */
+  color: var(--suave);                    /* color discreto */
+  text-align: center;                     /* centrada */
+  margin-top: 26px;                       /* separación con el texto */
+  padding-top: 14px;                      /* espacio bajo la línea */
+  border-top: 1px solid var(--linea);     /* línea fina arriba */
+}
+
+/* ===== Corazones que suben flotando ===== */
+.corazones {
+  position: fixed;                        /* se quedan fijos en la pantalla */
+  inset: 0;                               /* ocupan toda la pantalla */
+  pointer-events: none;                   /* no bloquean los toques */
+  z-index: 0;                             /* quedan detrás de la hoja */
+  overflow: hidden;                       /* no se salen de la pantalla */
+}
+.corazones span {
+  position: absolute;                     /* cada corazón se coloca por separado */
+  bottom: -40px;                          /* empieza debajo de la pantalla */
+  color: var(--acento);                   /* color de acento */
+  opacity: 0;                             /* invisible hasta que empieza a subir */
+  animation: subir linear infinite;       /* sube sin parar */
+}
+@keyframes subir {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 0; }           /* abajo e invisible */
+  10%  { opacity: 0.35; }                                               /* aparece suavemente */
+  100% { transform: translateY(-110vh) rotate(25deg); opacity: 0; }     /* sube hasta arriba y se desvanece */
+}
+/* Cada corazón con posición, tamaño y velocidad distintos */
+.corazones span:nth-child(1) { left: 8%;  font-size: 20px; animation-duration: 14s; animation-delay:
