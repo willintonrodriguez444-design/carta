@@ -1,0 +1,182 @@
+
+/* CONFIGURACIÓN GENERAL */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #E9EFE8;
+    color: #514F47;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    line-height: 1.7;
+    padding: 30px 15px;
+}
+
+/* CONTENEDOR PRINCIPAL */
+
+main {
+    max-width: 750px;
+    margin: 40px auto;
+    padding: 45px;
+    background-color: #FAF9F5;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(65, 80, 65, 0.08);
+}
+
+/* TÍTULOS */
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 48px;
+    color: #687D69;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #687D69;
+    font-size: 28px;
+    margin: 25px 0 12px;
+}
+
+h3 {
+    color: #687D69;
+    font-size: 24px;
+    margin: 25px 0 12px;
+}
+
+/* PÁRRAFOS */
+
+p {
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+/* SECCIONES */
+
+.punto {
+    background-color: #E9EFE8;
+    border-left: 4px solid #A8B9A5;
+    padding: 18px 22px;
+    margin: 22px 0;
+    border-radius: 10px;
+}
+
+.punto h2 {
+    margin-top: 0;
+}
+
+.punto p {
+    margin-bottom: 0;
+}
+
+/* FRASES DESTACADAS */
+
+blockquote {
+    background-color: #DCE5DA;
+    border-left: 4px solid #687D69;
+    padding: 22px;
+    margin: 30px 0;
+    border-radius: 10px;
+    color: #526653;
+    font-style: italic;
+}
+
+blockquote p {
+    text-align: center;
+    margin: 0;
+}
+
+/* MENÚ PRINCIPAL */
+
+.partes {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 25px;
+}
+
+.partes a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    padding: 13px;
+    color: #526653;
+    background-color: #E9EFE8;
+    border: 1px solid #DCE5DA;
+    border-radius: 10px;
+    transition: 0.3s ease;
+}
+
+.partes a:hover {
+    background-color: #687D69;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* BOTÓN VOLVER */
+
+.volver {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 10px 22px;
+    background-color: #687D69;
+    color: white;
+    text-decoration: none;
+    border-radius: 9px;
+    transition: 0.3s ease;
+}
+
+.volver:hover {
+    background-color: #526653;
+}
+
+/* ANIMACIÓN SUAVE */
+
+main {
+    animation: aparecer 0.7s ease;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* DISEÑO PARA CELULARES */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 12px;
+        font-size: 18px;
+    }
+
+    main {
+        margin: 15px auto;
+        padding: 25px 20px;
+    }
+
+    h1 {
+        font-size: 42px;
+    }
+
+    h2 {
+        font-size: 25px;
+    }
+
+    h3 {
+        font-size: 22px;
+    }
+
+}
